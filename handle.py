@@ -4,6 +4,7 @@ import hashlib
 import reply
 import receive
 import web
+from subprocess import call
 
 class Handle(object):
     def POST(self):
@@ -14,7 +15,11 @@ class Handle(object):
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                content = "test"
+                if recMsg.Content == 'h' or recMsg.Content == 'help' or recMsg.Content == '帮助':
+                    content = "实时余票查询格式：出发地-目的地,出发日,车次,车座,查询尝试次数\n如：-f 北京 -t 井冈山 -d 2016-09-30 -m z133 -n 软卧,硬卧 -r 3"
+                else:
+                    command = "php 12306.php " + recMsg.Content
+                    content = subprocess.call([command])
                 replyMsg = reply.TextMsg(toUser, fromUser, content)
                 return replyMsg.send()
             else:
