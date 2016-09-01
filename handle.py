@@ -10,20 +10,20 @@ class Handle(object):
     def POST(self):
         try:
             webData = web.data()
-            print "Handle Post webdata is ", webData   #ºóÌ¨´òÈÕÖ¾
+            print "Handle Post webdata is ", webData   #åå°æ‰“æ—¥å¿—
             recMsg = receive.parse_xml(webData)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                if recMsg.Content == 'h' or recMsg.Content == 'help' or recMsg.Content == '°ïÖú':
-                    content = "ÊµÊ±ÓàÆ±²éÑ¯¸ñÊ½£º³ö·¢µØ-Ä¿µÄµØ,³ö·¢ÈÕ,³µ´Î,³µ×ù,²éÑ¯³¢ÊÔ´ÎÊı\nÈç£º-f ±±¾© -t ¾®¸ÔÉ½ -d 2016-09-30 -m z133 -n ÈíÎÔ,Ó²ÎÔ -r 3"
+                if recMsg.Content == 'h' or recMsg.Content == 'help' or recMsg.Content == 'å¸®åŠ©':
+                    content = "å®æ—¶ä½™ç¥¨æŸ¥è¯¢æ ¼å¼ï¼šå‡ºå‘åœ°-ç›®çš„åœ°,å‡ºå‘æ—¥,è½¦æ¬¡,è½¦åº§,æŸ¥è¯¢å°è¯•æ¬¡æ•°\nå¦‚ï¼š-f åŒ—äº¬ -t äº•å†ˆå±± -d 2016-09-30 -m z133 -n è½¯å§,ç¡¬å§ -r 3"
                 else:
                     command = "php 12306.php " + recMsg.Content
                     content = subprocess.call([command])
                 replyMsg = reply.TextMsg(toUser, fromUser, content)
                 return replyMsg.send()
             else:
-                print "ÔİÇÒ²»´¦Àí"
+                print "æš‚ä¸”ä¸å¤„ç†"
                 return "success"
         except Exception, Argment:
             return Argment
