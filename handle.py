@@ -19,6 +19,7 @@ class Handle(object):
                     content = "实时余票查询格式：出发地-目的地,出发日,车次,车座,查询尝试次数\n如：-f 北京 -t 井冈山 -d 2016-09-30 -m z133 -n 软卧,硬卧 -r 3"
                 else:
                     command = "php /home/application/12306/12306/12306.php " + recMsg.Content
+					print "command:", command
                     content = subprocess.call([command])
                 replyMsg = reply.TextMsg(toUser, fromUser, content)
                 return replyMsg.send()
