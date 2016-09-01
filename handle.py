@@ -4,7 +4,8 @@ import hashlib
 import reply
 import receive
 import web
-from subprocess import call
+import os
+#from subprocess import call
 
 class Handle(object):
     def POST(self):
@@ -20,7 +21,7 @@ class Handle(object):
                 else:
                     command = "php /home/application/12306/12306/12306.php " + recMsg.Content
                     print "command:", command
-                    content = subprocess.call([command])
+                    content = os.popen(command).read() 
                     print "result:", content
                 replyMsg = reply.TextMsg(toUser, fromUser, content)
                 return replyMsg.send()
