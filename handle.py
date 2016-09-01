@@ -21,6 +21,7 @@ class Handle(object):
                     command = "php /home/application/12306/12306/12306.php " + recMsg.Content
                     print "command:", command
                     content = subprocess.call([command])
+                    print "result:", content
                 replyMsg = reply.TextMsg(toUser, fromUser, content)
                 return replyMsg.send()
             else:
